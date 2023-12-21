@@ -15,14 +15,14 @@ class GameTest {
     @Test
     public void shouldShowUpdatedScore(){
         Game game = new Game("Mexico", "Canada");
-        game.update(1,2);
+        assertTrue(game.update(1,2));
         assertEquals("Mexico 1 - Canada 2",game.toString());
     }
 
     @Test
     public void shouldShowNotUpdatedScoreWhenProvidedNumbersAreIncorrect(){
         Game game = new Game("Mexico", "Canada");
-        game.update(-1,2);
+        assertFalse(game.update(-1,2));
         assertEquals("Mexico 0 - Canada 0",game.toString());
     }
 
