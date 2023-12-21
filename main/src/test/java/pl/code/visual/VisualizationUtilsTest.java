@@ -10,7 +10,7 @@ class VisualizationUtilsTest {
     @Test
     public void shouldReturnGameString() {
         Game game = new Game("Mexico", "Canada");
-        game.update(2,3);
+        game.update(2, 3);
 
         assertEquals("Mexico 2 - Canada 3", VisualizationUtils.createGameString(game));
     }

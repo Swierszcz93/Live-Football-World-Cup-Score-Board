@@ -14,7 +14,7 @@ public class Game {
     }
 
     public boolean update(int homeTeamScore, int awayTeamScore) {
-        if (homeTeamScore >= 0 && awayTeamScore >= 0){
+        if (homeTeamScore >= 0 && awayTeamScore >= 0) {
             this.homeTeamScore = homeTeamScore;
             this.awayTeamScore = awayTeamScore;
             return true;

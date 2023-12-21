@@ -3,6 +3,8 @@ package pl.code.library;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScoreboardTest {
@@ -16,7 +18,8 @@ class ScoreboardTest {
     @Test
     public void shouldCreateFirstGame() {
         assertTrue(scoreboard.startGame("Mexico", "Canada"));
-        assertEquals("Mexico 0 - Canada 0\n", scoreboard.getSortedScoreBoard());
+
+        assertEquals(1, scoreboard.getSortedScoreboardList().size());
     }
 
     @Test
@@ -24,7 +27,8 @@ class ScoreboardTest {
         assertFalse(scoreboard.startGame(null, "Canada"));
         assertFalse(scoreboard.startGame("", "Canada"));
         assertFalse(scoreboard.startGame("    ", "Canada"));
-        assertEquals("", scoreboard.getSortedScoreBoard());
+
+        assertEquals(0, scoreboard.getSortedScoreboardList().size());
     }
 
     @Test
@@ -32,44 +36,55 @@ class ScoreboardTest {
         scoreboard.startGame("Mexico", "Canada");
 
         assertTrue(scoreboard.updateGame("Mexico", "Canada", 2, 3));
-        assertEquals("Mexico 2 - Canada 3\n", scoreboard.getSortedScoreBoard());
+
+        Game game = scoreboard.getSortedScoreboardList().get(0);
+        assertEquals(2, game.getHomeTeamScore());
+        assertEquals(3, game.getAwayTeamScore());
     }
 
     @Test
-    public void shouldNotUpdateGameWhenIncorrectNumber() {
+    public void shouldReturnFalseAndNotUpdateGameWhenIncorrectNumber() {
         scoreboard.startGame("Mexico", "Canada");
 
         assertFalse(scoreboard.updateGame("Mexico", "Canada", -2, 3));
-        assertEquals("Mexico 0 - Canada 0\n", scoreboard.getSortedScoreBoard());
+
+        Game game = scoreboard.getSortedScoreboardList().get(0);
+        assertEquals(0, game.getHomeTeamScore());
+        assertEquals(0, game.getAwayTeamScore());
     }
 
     @Test
-    public void shouldNotUpdateGameWhenNotExists() {
+    public void shouldReturnFalseAndNotUpdateNonExistingGame() {
         scoreboard.startGame("Mexico", "Canada");
 
         assertFalse(scoreboard.updateGame("Argentina", "Canada", 2, 3));
-        assertEquals("Mexico 0 - Canada 0\n", scoreboard.getSortedScoreBoard());
+
+        Game game = scoreboard.getSortedScoreboardList().get(0);
+        assertEquals(0, game.getHomeTeamScore());
+        assertEquals(0, game.getAwayTeamScore());
     }
 
     @Test
-    public void shouldRemoveExistingGame() {
+    public void shouldReturnTrueWhenRemovingExistingGame() {
         scoreboard.startGame("Mexico", "Canada");
 
         assertTrue(scoreboard.removeGame("Mexico", "Canada"));
-        assertEquals("", scoreboard.getSortedScoreBoard());
+
+        assertEquals(0, scoreboard.getSortedScoreboardList().size());
     }
 
 
     @Test
-    public void shouldNotRemoveNonExistingGame() {
+    public void shouldReturnFalseAndNotRemoveNonExistingGame() {
         scoreboard.startGame("Mexico", "Canada");
 
         assertFalse(scoreboard.removeGame("France", "Canada"));
-        assertEquals("Mexico 0 - Canada 0\n", scoreboard.getSortedScoreBoard());
+
+        assertEquals(1, scoreboard.getSortedScoreboardList().size());
     }
 
     @Test
-    public void shouldShowGamesInCorrectOrder() {
+    public void shouldReturnGamesInCorrectOrder() {
         scoreboard.startGame("Mexico", "Canada");
         scoreboard.updateGame("Mexico", "Canada", 0, 5);
         scoreboard.startGame("Spain", "Brazil");
@@ -81,13 +96,17 @@ class ScoreboardTest {
         scoreboard.startGame("Argentina", "Australia");
         scoreboard.updateGame("Argentina", "Australia", 3, 1);
 
-        assertEquals("""
-                Uruguay 6 - Italy 6
-                Spain 10 - Brazil 2
-                Mexico 0 - Canada 5
-                Argentina 3 - Australia 1
-                Germany 2 - France 2
-                """, scoreboard.getSortedScoreBoard());
+        List<Game> list = scoreboard.getSortedScoreboardList();
+        assertEquals("Uruguay", list.get(0).getHomeTeam());
+        assertEquals("Italy", list.get(0).getAwayTeam());
+        assertEquals("Spain", list.get(1).getHomeTeam());
+        assertEquals("Brazil", list.get(1).getAwayTeam());
+        assertEquals("Mexico", list.get(2).getHomeTeam());
+        assertEquals("Canada", list.get(2).getAwayTeam());
+        assertEquals("Argentina", list.get(3).getHomeTeam());
+        assertEquals("Australia", list.get(3).getAwayTeam());
+        assertEquals("Germany", list.get(4).getHomeTeam());
+        assertEquals("France", list.get(4).getAwayTeam());
     }
 
 }

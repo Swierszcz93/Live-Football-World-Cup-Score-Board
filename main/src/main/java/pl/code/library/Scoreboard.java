@@ -42,9 +42,4 @@ public class Scoreboard {
     private Optional<Game> findGame(String homeTeam, String awayTeam) {
         return gameList.stream().filter(game -> game.getHomeTeam().equals(homeTeam) && game.getAwayTeam().equals(awayTeam)).findFirst();
     }
-
-    public String getSortedScoreBoard() {
-        return "";
-        //TODO to remove after refactor
-    }
 }
