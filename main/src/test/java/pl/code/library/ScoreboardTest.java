@@ -44,6 +44,14 @@ class ScoreboardTest {
     }
 
     @Test
+    public void shouldNotUpdateGameWhenNotExists() {
+        scoreboard.startGame("Mexico", "Canada");
+
+        assertFalse(scoreboard.updateGame("Argentina", "Canada", 2, 3));
+        assertEquals("Mexico 0 - Canada 0\n", scoreboard.getSortedScoreBoard());
+    }
+
+    @Test
     public void shouldRemoveExistingGame() {
         scoreboard.startGame("Mexico", "Canada");
 
