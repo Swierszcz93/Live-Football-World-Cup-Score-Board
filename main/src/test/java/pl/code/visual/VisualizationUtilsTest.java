@@ -2,13 +2,14 @@ package pl.code.visual;
 
 import org.junit.jupiter.api.Test;
 import pl.code.library.Game;
+import pl.code.library.NonValidNamesException;
 import pl.code.library.Scoreboard;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class VisualizationUtilsTest {
     @Test
-    public void shouldReturnGameString() {
+    public void shouldReturnGameString() throws NonValidNamesException {
         Game game = new Game("Mexico", "Canada");
         game.update(2, 3);
 

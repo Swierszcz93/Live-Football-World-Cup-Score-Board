@@ -1,5 +1,6 @@
 package pl.code.library;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +10,7 @@ public class Scoreboard {
 
     public List<Game> getSortedScoreboardList() {
         sortList();
-        return gameList;
+        return Collections.unmodifiableList(gameList);
     }
 
     private void sortList() {
@@ -20,15 +21,11 @@ public class Scoreboard {
     }
 
     public boolean startGame(String homeTeam, String awayTeam) {
-        if (isNameValid(homeTeam) && isNameValid(awayTeam)) {
-            gameList.add(new Game(homeTeam, awayTeam));
-            return true;
+        try {
+            return gameList.add(new Game(homeTeam, awayTeam));
+        } catch (NonValidNamesException e) {
+            return false;
         }
-        return false;
-    }
-
-    private boolean isNameValid(String teamName) {
-        return null != teamName && !teamName.isBlank();
     }
 
     public boolean updateGame(String homeTeam, String awayTeam, int homeTeamScore, int awayTeamScore) {
