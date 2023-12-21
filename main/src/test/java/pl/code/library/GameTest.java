@@ -21,16 +21,19 @@ class GameTest {
         try {
             game = new Game(null, "Canada");
         } catch (NonValidNamesException e) {
+            assertEquals("Invalid name: 'null' or 'Canada'", e.getMessage());
             catchCount++;
         }
         try {
             game = new Game("", "Canada");
         } catch (NonValidNamesException e) {
+            assertEquals("Invalid name: '' or 'Canada'", e.getMessage());
             catchCount++;
         }
         try {
             game = new Game("     ", "Canada");
         } catch (NonValidNamesException e) {
+            assertEquals("Invalid name: '     ' or 'Canada'", e.getMessage());
             catchCount++;
         }
         assertNull(game);
