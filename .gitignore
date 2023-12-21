@@ -27,6 +27,9 @@ replay_pid*
 .idea
 
 #gradle
-/main/.gradle/
+/main/.gradle
+/main/build
 *.bin
 *.lock
+/main/gradlew
+/main/gradlew.bat
