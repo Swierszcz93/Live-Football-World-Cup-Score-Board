@@ -1,12 +1,12 @@
 package pl.code.library;
 
-public class Match {
+public class Game {
     private final String homeTeam;
     private final String awayTeam;
     private int homeTeamScore = 0;
     private int awayTeamScore = 0;
 
-    public Match(String homeTeam, String awayTeam) {
+    public Game(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
     }
