@@ -5,18 +5,12 @@ public class Game {
     private final String awayTeam;
     private int homeTeamScore = 0;
     private int awayTeamScore = 0;
-
     private final long startTime;
 
     public Game(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         startTime = System.nanoTime(); //used instead of System.currentTimeMillis(); <- caused problems in tests
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s %d - %s %d", homeTeam, homeTeamScore, awayTeam, awayTeamScore);
     }
 
     public boolean update(int homeTeamScore, int awayTeamScore) {

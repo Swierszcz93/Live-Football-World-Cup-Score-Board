@@ -7,23 +7,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameTest {
 
     @Test
-    public void shouldShowZeroScore(){
+    public void shouldHaveZeroScoreAfterInitialization(){
         Game game = new Game("Mexico", "Canada");
-        assertEquals("Mexico 0 - Canada 0",game.toString());
+
+        assertEquals(0, game.getHomeTeamScore());
+        assertEquals(0, game.getAwayTeamScore());
     }
 
     @Test
-    public void shouldShowUpdatedScore(){
+    public void shouldUpdateScore(){
         Game game = new Game("Mexico", "Canada");
         assertTrue(game.update(1,2));
-        assertEquals("Mexico 1 - Canada 2",game.toString());
+
+        assertEquals(1, game.getHomeTeamScore());
+        assertEquals(2, game.getAwayTeamScore());
     }
 
     @Test
-    public void shouldShowNotUpdatedScoreWhenProvidedNumbersAreIncorrect(){
+    public void shouldNotUpdatedScoreWhenProvidedNumbersAreIncorrect(){
         Game game = new Game("Mexico", "Canada");
         assertFalse(game.update(-1,2));
-        assertEquals("Mexico 0 - Canada 0",game.toString());
+
+        assertEquals(0, game.getHomeTeamScore());
+        assertEquals(0, game.getAwayTeamScore());
     }
 
 

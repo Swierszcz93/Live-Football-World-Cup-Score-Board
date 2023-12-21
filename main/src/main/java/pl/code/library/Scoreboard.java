@@ -1,19 +1,15 @@
 package pl.code.library;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 public class Scoreboard {
     private final LinkedList<Game> gameList = new LinkedList<>();
 
-    public String getSortedScoreBoard() {
+    public List<Game> getSortedScoreboardList() {
         sortList();
-        StringBuilder output = new StringBuilder();
-        for (Game game : gameList) {
-            output.append(String.format("%s", game));
-            output.append("\n");
-        }
-        return output.toString();
+        return gameList;
     }
 
     private void sortList() {
@@ -45,5 +41,10 @@ public class Scoreboard {
 
     private Optional<Game> findGame(String homeTeam, String awayTeam) {
         return gameList.stream().filter(game -> game.getHomeTeam().equals(homeTeam) && game.getAwayTeam().equals(awayTeam)).findFirst();
+    }
+
+    public String getSortedScoreBoard() {
+        return "";
+        //TODO to remove after refactor
     }
 }
