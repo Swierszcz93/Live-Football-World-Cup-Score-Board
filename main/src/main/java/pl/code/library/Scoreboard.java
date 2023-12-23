@@ -1,16 +1,23 @@
 package pl.code.library;
 
+import pl.code.library.visual.VisualizationUtils;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 public class Scoreboard {
-    private final LinkedList<Game> gameList = new LinkedList<>();
+    private final List<Game> gameList = new LinkedList<>();
+    private final VisualizationUtils visualizationUtils = new VisualizationUtils();
 
     public List<Game> getSortedScoreboardList() {
         sortList();
         return Collections.unmodifiableList(gameList);
+    }
+
+    public String getVizualizedString(){
+        return visualizationUtils.createScoreboardString(getSortedScoreboardList());
     }
 
     private void sortList() {
@@ -32,7 +39,7 @@ public class Scoreboard {
         return findGame(homeTeam, awayTeam).map(game -> game.update(homeTeamScore, awayTeamScore)).orElse(false);
     }
 
-    public boolean removeGame(String homeTeam, String awayTeam) {
+    public boolean finishGame(String homeTeam, String awayTeam) {
         return gameList.remove(findGame(homeTeam, awayTeam).orElse(null));
     }
 

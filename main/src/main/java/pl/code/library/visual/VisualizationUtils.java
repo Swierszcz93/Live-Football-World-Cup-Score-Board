@@ -1,16 +1,17 @@
-package pl.code.visual;
+package pl.code.library.visual;
 
 import pl.code.library.Game;
-import pl.code.library.Scoreboard;
+
+import java.util.List;
 
 public class VisualizationUtils {
-    public static String createGameString(Game game) {
+    private String createGameString(Game game) {
         return String.format("%s %d - %s %d", game.getHomeTeam(), game.getHomeTeamScore(), game.getAwayTeam(), game.getAwayTeamScore());
     }
 
-    public static String createScoreboardString(Scoreboard scoreboard) {
+    public String createScoreboardString(List<Game> gameList) {
         StringBuilder output = new StringBuilder();
-        for (Game game : scoreboard.getSortedScoreboardList()) {
+        for (Game game : gameList) {
             output.append(createGameString(game));
             output.append("\n");
         }

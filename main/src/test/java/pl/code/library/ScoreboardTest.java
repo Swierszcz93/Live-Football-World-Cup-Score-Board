@@ -68,7 +68,7 @@ class ScoreboardTest {
     public void shouldReturnTrueWhenRemovingExistingGame() {
         scoreboard.startGame("Mexico", "Canada");
 
-        assertTrue(scoreboard.removeGame("Mexico", "Canada"));
+        assertTrue(scoreboard.finishGame("Mexico", "Canada"));
 
         assertEquals(0, scoreboard.getSortedScoreboardList().size());
     }
@@ -78,7 +78,7 @@ class ScoreboardTest {
     public void shouldReturnFalseAndNotRemoveNonExistingGame() {
         scoreboard.startGame("Mexico", "Canada");
 
-        assertFalse(scoreboard.removeGame("France", "Canada"));
+        assertFalse(scoreboard.finishGame("France", "Canada"));
 
         assertEquals(1, scoreboard.getSortedScoreboardList().size());
     }
@@ -109,4 +109,25 @@ class ScoreboardTest {
         assertEquals("France", list.get(4).getAwayTeam());
     }
 
+    @Test
+    public void shouldShowSortedScoreboard(){
+        scoreboard.startGame("Mexico", "Canada");
+        scoreboard.updateGame("Mexico", "Canada", 0, 5);
+        scoreboard.startGame("Spain", "Brazil");
+        scoreboard.updateGame("Spain", "Brazil", 10, 2);
+        scoreboard.startGame("Germany", "France");
+        scoreboard.updateGame("Germany", "France", 2, 2);
+        scoreboard.startGame("Uruguay", "Italy");
+        scoreboard.updateGame("Uruguay", "Italy", 6, 6);
+        scoreboard.startGame("Argentina", "Australia");
+        scoreboard.updateGame("Argentina", "Australia", 3, 1);
+
+        assertEquals("""
+                Uruguay 6 - Italy 6
+                Spain 10 - Brazil 2
+                Mexico 0 - Canada 5
+                Argentina 3 - Australia 1
+                Germany 2 - France 2
+                """, scoreboard.getVizualizedString());
+    }
 }

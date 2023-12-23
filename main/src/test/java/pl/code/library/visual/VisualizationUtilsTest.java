@@ -1,20 +1,13 @@
-package pl.code.visual;
+package pl.code.library.visual;
 
 import org.junit.jupiter.api.Test;
-import pl.code.library.Game;
-import pl.code.library.NonValidNamesException;
 import pl.code.library.Scoreboard;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class VisualizationUtilsTest {
-    @Test
-    public void shouldReturnGameString() throws NonValidNamesException {
-        Game game = new Game("Mexico", "Canada");
-        game.update(2, 3);
 
-        assertEquals("Mexico 2 - Canada 3", VisualizationUtils.createGameString(game));
-    }
+    private final VisualizationUtils visualizationUtils = new VisualizationUtils();
 
     @Test
     public void shouldReturnScoreboardString() {
@@ -36,6 +29,6 @@ class VisualizationUtilsTest {
                 Mexico 0 - Canada 5
                 Argentina 3 - Australia 1
                 Germany 2 - France 2
-                """, VisualizationUtils.createScoreboardString(scoreboard));
+                """, visualizationUtils.createScoreboardString(scoreboard.getSortedScoreboardList()));
     }
 }
