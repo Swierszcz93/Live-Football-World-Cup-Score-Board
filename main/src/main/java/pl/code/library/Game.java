@@ -51,4 +51,8 @@ public class Game {
     public long getStartTime() {
         return startTime;
     }
+
+    public int getTotalScore() {
+        return homeTeamScore + awayTeamScore;
+    }
 }

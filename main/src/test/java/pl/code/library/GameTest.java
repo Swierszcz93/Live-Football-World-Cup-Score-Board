@@ -58,5 +58,12 @@ class GameTest {
         assertEquals(0, game.getAwayTeamScore());
     }
 
+    @Test
+    public void shouldReturnTotalGameScore() throws NonValidNamesException {
+        Game game = new Game("Mexico", "Canada");
+        assertTrue(game.update(1, 2));
+
+        assertEquals(3, game.getTotalScore());
+    }
 
 }

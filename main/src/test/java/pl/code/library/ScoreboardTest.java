@@ -110,7 +110,7 @@ class ScoreboardTest {
     }
 
     @Test
-    public void shouldShowSortedScoreboard(){
+    public void shouldShowSortedScoreboard() {
         scoreboard.startGame("Mexico", "Canada");
         scoreboard.updateGame("Mexico", "Canada", 0, 5);
         scoreboard.startGame("Spain", "Brazil");

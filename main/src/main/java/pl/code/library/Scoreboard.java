@@ -2,29 +2,20 @@ package pl.code.library;
 
 import pl.code.library.visual.VisualizationUtils;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class Scoreboard {
     private final List<Game> gameList = new LinkedList<>();
     private final VisualizationUtils visualizationUtils = new VisualizationUtils();
+    private final Comparator<Game> sortStrategy = Comparator.comparingInt(Game::getTotalScore).thenComparingLong(Game::getStartTime).reversed();
 
     public List<Game> getSortedScoreboardList() {
-        sortList();
+        gameList.sort(sortStrategy);
         return Collections.unmodifiableList(gameList);
     }
 
-    public String getVizualizedString(){
+    public String getVizualizedString() {
         return visualizationUtils.createScoreboardString(getSortedScoreboardList());
-    }
-
-    private void sortList() {
-        gameList.sort((game1, game2) -> {
-            int scoreComparator = Integer.compare(game2.getHomeTeamScore() + game2.getAwayTeamScore(), game1.getHomeTeamScore() + game1.getAwayTeamScore());
-            return scoreComparator != 0 ? scoreComparator : Long.compare(game2.getStartTime(), game1.getStartTime());
-        });
     }
 
     public boolean startGame(String homeTeam, String awayTeam) {
