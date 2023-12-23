@@ -1,12 +1,12 @@
 package pl.code.library;
 
-import pl.code.library.visual.VisualizationUtils;
+import pl.code.library.visual.Visualizer;
 
 import java.util.*;
 
 public class Scoreboard {
     private final List<Game> gameList = new LinkedList<>();
-    private final VisualizationUtils visualizationUtils = new VisualizationUtils();
+    private final Visualizer visualizer = new Visualizer();
     private final Comparator<Game> sortStrategy = Comparator.comparingInt(Game::getTotalScore).thenComparingLong(Game::getStartTime).reversed();
 
     public List<Game> getSortedScoreboardList() {
@@ -15,26 +15,26 @@ public class Scoreboard {
     }
 
     public String getVizualizedString() {
-        return visualizationUtils.createScoreboardString(getSortedScoreboardList());
+        return visualizer.createScoreboardString(getSortedScoreboardList());
     }
 
-    public boolean startGame(String homeTeam, String awayTeam) {
+    public boolean startGame(String homeTeamName, String awayTeamName) {
         try {
-            return gameList.add(new Game(homeTeam, awayTeam));
+            return gameList.add(new Game(homeTeamName, awayTeamName));
         } catch (NonValidNamesException e) {
             return false;
         }
     }
 
-    public boolean updateGame(String homeTeam, String awayTeam, int homeTeamScore, int awayTeamScore) {
-        return findGame(homeTeam, awayTeam).map(game -> game.update(homeTeamScore, awayTeamScore)).orElse(false);
+    public boolean updateGame(String homeTeamName, String awayTeamName, int homeTeamScore, int awayTeamScore) {
+        return findGame(homeTeamName, awayTeamName).map(game -> game.update(homeTeamScore, awayTeamScore)).orElse(false);
     }
 
-    public boolean finishGame(String homeTeam, String awayTeam) {
-        return gameList.remove(findGame(homeTeam, awayTeam).orElse(null));
+    public boolean finishGame(String homeTeamName, String awayTeamName) {
+        return gameList.remove(findGame(homeTeamName, awayTeamName).orElse(null));
     }
 
-    private Optional<Game> findGame(String homeTeam, String awayTeam) {
-        return gameList.stream().filter(game -> game.getHomeTeam().equals(homeTeam) && game.getAwayTeam().equals(awayTeam)).findFirst();
+    private Optional<Game> findGame(String homeTeamName, String awayTeamName) {
+        return gameList.stream().filter(game -> game.getHomeTeamName().equals(homeTeamName) && game.getAwayTeamName().equals(awayTeamName)).findFirst();
     }
 }

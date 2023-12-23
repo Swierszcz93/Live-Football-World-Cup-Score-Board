@@ -5,9 +5,9 @@ import pl.code.library.Scoreboard;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class VisualizationUtilsTest {
+class VisualizerTest {
 
-    private final VisualizationUtils visualizationUtils = new VisualizationUtils();
+    private final Visualizer visualizer = new Visualizer();
 
     @Test
     public void shouldReturnScoreboardString() {
@@ -29,6 +29,6 @@ class VisualizationUtilsTest {
                 Mexico 0 - Canada 5
                 Argentina 3 - Australia 1
                 Germany 2 - France 2
-                """, visualizationUtils.createScoreboardString(scoreboard.getSortedScoreboardList()));
+                """, visualizer.createScoreboardString(scoreboard.getSortedScoreboardList()));
     }
 }

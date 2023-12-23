@@ -97,16 +97,16 @@ class ScoreboardTest {
         scoreboard.updateGame("Argentina", "Australia", 3, 1);
 
         List<Game> list = scoreboard.getSortedScoreboardList();
-        assertEquals("Uruguay", list.get(0).getHomeTeam());
-        assertEquals("Italy", list.get(0).getAwayTeam());
-        assertEquals("Spain", list.get(1).getHomeTeam());
-        assertEquals("Brazil", list.get(1).getAwayTeam());
-        assertEquals("Mexico", list.get(2).getHomeTeam());
-        assertEquals("Canada", list.get(2).getAwayTeam());
-        assertEquals("Argentina", list.get(3).getHomeTeam());
-        assertEquals("Australia", list.get(3).getAwayTeam());
-        assertEquals("Germany", list.get(4).getHomeTeam());
-        assertEquals("France", list.get(4).getAwayTeam());
+        assertEquals("Uruguay", list.get(0).getHomeTeamName());
+        assertEquals("Italy", list.get(0).getAwayTeamName());
+        assertEquals("Spain", list.get(1).getHomeTeamName());
+        assertEquals("Brazil", list.get(1).getAwayTeamName());
+        assertEquals("Mexico", list.get(2).getHomeTeamName());
+        assertEquals("Canada", list.get(2).getAwayTeamName());
+        assertEquals("Argentina", list.get(3).getHomeTeamName());
+        assertEquals("Australia", list.get(3).getAwayTeamName());
+        assertEquals("Germany", list.get(4).getHomeTeamName());
+        assertEquals("France", list.get(4).getAwayTeamName());
     }
 
     @Test

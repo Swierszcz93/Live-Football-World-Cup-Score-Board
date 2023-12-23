@@ -4,9 +4,9 @@ import pl.code.library.Game;
 
 import java.util.List;
 
-public class VisualizationUtils {
+public class Visualizer {
     private String createGameString(Game game) {
-        return String.format("%s %d - %s %d", game.getHomeTeam(), game.getHomeTeamScore(), game.getAwayTeam(), game.getAwayTeamScore());
+        return String.format("%s %d - %s %d", game.getHomeTeamName(), game.getHomeTeamScore(), game.getAwayTeamName(), game.getAwayTeamScore());
     }
 
     public String createScoreboardString(List<Game> gameList) {
